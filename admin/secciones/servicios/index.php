@@ -1,4 +1,23 @@
-<?php  include("../../templates/header.php");  ?>
+<?php  
+include("../../bd.php");
+
+if(isset($_GET['txtID'])){
+    //borrar dicho registro con el ID correspondiente
+  
+    $txtID= ( isset($_GET['txtID']) )?$_GET['txtID']:""; //RECEPCIONAR EL ID
+    $sentencia=$conexion->prepare("DELETE FROM tbl_servicios WHERE id=:id");
+    $sentencia->bindParam(":id",$txtID);
+    $sentencia->execute();
+
+}
+
+  //seleccionar registros
+  $sentencia=$conexion->prepare("SELECT * FROM `tbl_servicios`");
+  $sentencia->execute();
+  $lista_servicios=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+  //print_r($lista_servicios); PARA SABERS SI ESTAN LLEGANDO LOS VALORES
+
+include("../../templates/header.php");  ?>
 
 Listar servicios
 
@@ -19,20 +38,18 @@ Listar servicios
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach($lista_servicios as $registros){ ?>
                     <tr class="">
-                        <td>1</td>
-                        <td>fa-book</td>
-                        <td>tutorias</td>
-                        <td>servicios de tutoria para programacion</td>
-                        <td>Editar|Eliminar</td>
+                        <td><?php echo $registros['ID'];?></td> <!-- EL NOMBRE DEL ARRAY DEBE SER EL MIMSO QUE DE LA BASE DE DATOS-->
+                        <td><?php echo $registros['icono'];?></td>
+                        <td><?php echo $registros['titulo'];?></td>
+                        <td><?php echo $registros['descripcion'];?></td>
+                        <td>
+                          <a name="editar" id="editar" class="btn btn-info" href="editar.php?txtID=<?php echo $registros['ID'];?>" role="button">Editar</a>
+                          <a name="eliminar" id="eliminar" class="btn btn-danger" href="index.php?txtID=<?php echo $registros['ID'];?>" role="button">Eliminar</a>
+                        </td>
                     </tr>
-                    <tr class="">
-                        <td>1</td>
-                        <td>fa-book</td>
-                        <td>tutorias</td>
-                        <td>servicios de tutoria para programacion</td>
-                        <td>Editar|Eliminar</td>
-                    </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

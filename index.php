@@ -1,3 +1,14 @@
+<?php 
+    include("admin/bd.php"); 
+
+    //seleccionar registros
+    $sentencia=$conexion->prepare("SELECT * FROM `tbl_servicios`");
+    $sentencia->execute();
+    $lista_servicios=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,11 +38,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portafolio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">Entradas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Equipo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contactanos</a></li>
                     </ul>
                 </div>
             </div>
@@ -48,34 +59,21 @@
         <section class="page-section" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Servicios</h2>
+                    <h3 class="section-subheading text-muted">Los servicios que generamos.</h3>
                 </div>
+
                 <div class="row text-center">
+                <?php foreach($lista_servicios as $registros){ ?>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                            <i class="fas <?php echo $registros["icono"];?> fa-stack-1x fa-inverse"></i>
                         </span>
-                        <h4 class="my-3">E-Commerce</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        <h4 class="my-3"><?php echo $registros["titulo"];?></h4>
+                        <p class="text-muted"><?php echo $registros["descripcion"];?></p>
                     </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Responsive Design</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Web Security</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
+                <?php } ?>
                 </div>
             </div>
         </section>
