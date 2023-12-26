@@ -12,18 +12,30 @@ if($_POST){
     $categoria =(isset($_POST['categoria']))?$_POST['categoria']:"";
     $url =(isset($_POST['url']))?$_POST['url']:"";
 
+    $fecha_imagen= new DateTime();
+    $nombre_archivo_imagen=($imagen!="")? $fecha_imagen->getTimestamp()."_".$imagen:"";
+   // $nombre_archivo_imagen = ($imagen != "") ? "img_" . uniqid() . "_" . $imagen : "";
+
+
+    $tmp_imagen=$_FILES['imagen']['tmp_name'];
+    if($tmp_imagen!="" ){
+        move_uploaded_file($tmp_imagen,"../../../assets/img/portfolio/".$nombre_archivo_imagen);
+    }
+
     $sentencia=$conexion->prepare("INSERT INTO `tbl_portafolio` (`ID`, `titulo`, `subtitulo`, `imagen`, `descripcion`, `cliente`, `categoria`, `url`) 
     VALUES (NULL, :titulo, :subtitulo, :imagen, :descripcion, :cliente, :categoria, :url);");
 
     $sentencia->bindParam(":titulo",$titulo);
     $sentencia->bindParam(":subtitulo",$subtitulo);
-    $sentencia->bindParam(":imagen",$imagen);
+    $sentencia->bindParam(":imagen",$nombre_archivo_imagen);
     $sentencia->bindParam(":descripcion",$descripcion);
     $sentencia->bindParam(":cliente",$cliente);
     $sentencia->bindParam(":categoria",$categoria);
     $sentencia->bindParam(":url",$url);
 
     $sentencia->execute();
+    $mensaje="Registro agregado con exito.";
+    header("Location:index.php?mensaje=".$mensaje);
 }
 
 

@@ -20,7 +20,6 @@ if(isset($_GET['txtID'])){
 }
 
 if($_POST){
-    
       //recepcionamos los valores del formulario
       $titulo=(isset($_POST['titulo']))?$_POST['titulo']:"";
       $subtitulo=(isset($_POST['subtitulo']))?$_POST['subtitulo']:"";
@@ -34,7 +33,7 @@ if($_POST){
        SET 
        titulo=:titulo, 
        subtitulo=:subtitulo,
-    
+       
        descripcion=:descripcion,
        cliente=:cliente,
        categoria=:categoria,
@@ -86,14 +85,14 @@ include("../../templates/header.php");
             </div>
             <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen:</label>
+                <img width="100px" src="../../../assets/img/portfolio/<?php echo $imagen;?>"/>
                 <input
-                    value="<?php echo $imagen; ?>"
                     type="file"
                     class="form-control"
                     name="imagen" 
                     id="imagen"
                     aria-describedby="helpId"
-                    placeholder=""/>
+                    placeholder="Imagen"/>
             </div>
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripcion:</label>

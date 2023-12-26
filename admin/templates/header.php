@@ -1,4 +1,4 @@
-<?php $url_base="http://localhost/ejercicios/website/admin/"; ?>
+<?php $url_base="http://localhost/ejercicios/Sitio-Web-con-PHP/admin/"; ?>
 
 <!doctype html>
 <html lang="en">
@@ -24,7 +24,7 @@
             <nav class="navbar navbar-expand navbar-light bg-light">
                 <div class="nav navbar-nav">
                     <a class="nav-item nav-link active" href="#" aria-current="page"> Administrador <span class="visually-hidden">(current)</span></a>
-                    <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/servicios/">Servicios</a>
+                    <a class="nav-item nav-link active" href="<?php echo $url_base;?>secciones/servicios/">Servicios</a>
                     <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/portafolio/">Portafolio</a>
                     <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/entradas">Entradas</a>
                     <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/equipo">Equipo</a>
