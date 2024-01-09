@@ -19,8 +19,6 @@ if(isset($_GET['txtID'])){
 
 include("../../templates/header.php");  ?>
 
-Listar servicios
-
 <div class="card">
     <div class="card-header">
         <a name="" id="" class="btn btn-primary" href="crear.php" role="button">Agregar registros</a>
