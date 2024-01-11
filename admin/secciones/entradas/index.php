@@ -51,8 +51,8 @@ include("../../templates/header.php");  ?>
                 <?php foreach($lista_entradas as $registros){ ?>
                     <tr class="">
                         <td><?php echo $registros['ID'];?></td>
-                        <td><?php echo $registros['titulo'];?></td>
                         <td><?php echo $registros['fecha'];?></td>
+                        <td><?php echo $registros['titulo'];?></td>
                         <td><?php echo $registros['descripcion'];?></td>
                         <td> 
                             <img width="100px" src="../../../assets/img/about/<?php echo $registros['imagen'];?>">

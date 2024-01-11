@@ -41,7 +41,6 @@ if($_POST){
 
       $sentencia->bindParam(":titulo",$titulo);
       $sentencia->bindParam(":subtitulo",$subtitulo);
-    //  $sentencia->bindParam(":imagen",$descripcion);
       $sentencia->bindParam(":descripcion",$descripcion);
       $sentencia->bindParam(":cliente",$cliente);
       $sentencia->bindParam(":categoria",$categoria);
@@ -76,7 +75,7 @@ if($_POST){
     
       }
 
-      $mensaje="Registro agregado con exito.";
+      $mensaje="Registro modificado con exito.";
       header("Location:index.php?mensaje=".$mensaje);
 
 }

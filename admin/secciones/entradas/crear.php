@@ -54,13 +54,7 @@ include("../../templates/header.php");
                 <input type="file" class="form-control" name="imagen" id="imagen" aria-describedby="helpId" placeholder=""/>
             </div>
             <button type="submit" class="btn btn-success">Agregar</button>
-            <a name=""
-                id=""
-                class="btn btn-primary"
-                href="index.php"
-                role="button">
-                Cancelar
-            </a>
+            <a name="" id="" class="btn btn-primary" href="index.php" role="button">Cancelar</a>
         </form>
     </div>
     <div class="card-footer text-muted"></div>
