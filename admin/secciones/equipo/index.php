@@ -1,10 +1,30 @@
 <?php
 include("../../bd.php"); 
 
+if(isset($_GET['txtID'])){
+    //borrar dicho registro con el ID correspondiente
+    $txtID= ( isset($_GET['txtID']) )?$_GET['txtID']:""; //RECEPCIONAR EL ID
+
+    $sentencia=$conexion->prepare("SELECT * FROM tbl_equipo WHERE id=:id");
+    $sentencia->bindParam(":id",$txtID);
+    $sentencia->execute();
+    $registro_imagen=$sentencia->fetch(PDO::FETCH_LAZY);
+
+    if(isset($registro_imagen["imagen"])){
+        if(file_exists("../../../assets/img/team/".$registro_imagen["imagen"])){
+            unlink("../../../assets/img/team/".$registro_imagen["imagen"]);
+        }
+    }
+
+    $sentencia=$conexion->prepare("DELETE FROM tbl_equipo WHERE id=:id");
+    $sentencia->bindParam(":id",$txtID);
+    $sentencia->execute();
+}
+
     //SELECCIONAR REGISTROS
     $sentencia=$conexion->prepare("SELECT * FROM `tbl_equipo`");
     $sentencia->execute();
-    $lista_servicios=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $lista_equipo=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 
 include("../../templates/header.php");  
@@ -21,28 +41,30 @@ include("../../templates/header.php");
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Imagen</th>
-                        <th scope="col">NombreCompleto</th>
+                        <th scope="col">Nombre Completo</th>
                         <th scope="col">Puesto</th>
-                        <th scope="col">Twitter</th>
-                        <th scope="col">Facebook</th>
-                        <th scope="col">LinkedIn</th>
+                        <th scope="col">Redes Sociales</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php foreach($lista_equipo as $registros){ ?>
                     <tr class="">
-                        <td>R1C1</td>
-                        <td>R1C2</td>
-                        <td>R1C3</td>
-                        <td>R1C3</td>
-                        <td>R1C3</td>
-                        <td>R1C3</td>
-                        <td>R1C3</td>
+                        <td><?php echo $registros['ID'];?></td>
+                        <td><img width="100px" src="../../../assets/img/team/<?php echo $registros['imagen'];?>"/></td>
+                        <td><?php echo $registros['nombrecompleto'];?></td>
+                        <td><?php echo $registros['puesto'];?></td>
+                        <td>
+                            <?php echo $registros['twitter'];?><br>
+                            <?php echo $registros['facebook'];?><br>
+                            <?php echo $registros['linkedin'];?>
+                        </td>
                         <td>
                             <a name="editar" id="editar" class="btn btn-info" href="editar.php?txtID=<?php echo $registros['ID'];?>" role="button">Editar</a>
                             <a name="eliminar" id="eliminar" class="btn btn-danger" href="index.php?txtID=<?php echo $registros['ID'];?>" role="button">Eliminar</a>      
                         </td>
                     </tr> 
+                    <?php }?>
                 </tbody>
             </table>
         </div>

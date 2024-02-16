@@ -25,7 +25,8 @@ if(isset($_GET['txtID'])){
   $sentencia->execute();
   $lista_servicios=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
-include("../../templates/header.php");  ?>
+include("../../templates/header.php");  
+?>
 
 <div class="card">
     <div class="card-header">
